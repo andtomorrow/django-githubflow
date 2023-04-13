@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>{{ review.title }}</h3>
+<p>{{ review.content }}</p>
+<p>{{ review.movie }}</p>
+
+{% if request.user == review.user %}
+    <form action="{% url 'reviews:update' review.pk %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="수정">
+    </form>
+    <form action="{% url 'reviews:delete' review.pk %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="삭제">
+    </form>
+{% endif %}
+<form action="{% url 'reviews:comment_create' review.pk %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="작성">
+</form>
+<a href="{% url 'reviews:index' %}">뒤로 가기</a>
+{% for comment in comments %}
+    {{ comment.user }}
+    {{ comment.content }}
+    <form action="{% url 'reviews:comment_delete' %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="삭제">
+    </form>
+{% endfor %}
+
+{% endblock content %}

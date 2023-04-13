@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>
+    {{ user }}님, 안녕하세요.
+</h1>
+{% for review in reviews %}
+    <p>제목 - <a href="{% url 'reviews:detail' review.pk %}">{{ review.title }}</a></p>
+    <p>글쓴이 - {{ review.user }}</p>
+    <p>내용 - {{ review.content }}</p>
+    <p>영화 : {{ review.movie }}</p>
+{% endfor %}
+<form action="{% url 'reviews:create' %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="글 쓰기">
+</form>
+
+{% endblock content %}
