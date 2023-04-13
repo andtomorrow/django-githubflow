@@ -5,6 +5,7 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, CustomUserChangeForm
+from . models import User
 
 # Create your views here.
 def login(request):
@@ -66,3 +67,11 @@ def update(request):
         'form': form,
     }
     return render(request, 'accounts/update.html', context)
+
+def profile(request, pk):
+    profile = User.objects.get(pk=pk)
+    context = {
+        'profile':profile
+    }
+    return render(request, 'accounts/profile.html', context)
+

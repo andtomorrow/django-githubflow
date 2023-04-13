@@ -1,8 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
+{% if user.pk %}
 <h1>
-    {{ user }}님, 안녕하세요.
+    <a href="{% url 'accounts:profile' user.pk %}">{{ user }}</a>님, 안녕하세요.
 </h1>
+{% else %}
+{{ user }}</a>님, 안녕하세요.
+
+{% endif %}
+<a href="{% url 'accounts:logout' %}">로그아웃</a>
 {% for review in reviews %}
     <p>제목 - <a href="{% url 'reviews:detail' review.pk %}">{{ review.title }}</a></p>
     <p>글쓴이 - {{ review.user }}</p>
