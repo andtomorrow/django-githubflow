@@ -4,7 +4,7 @@
 <form action="{% url 'reviews:create' %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="글 작성">
+    <input type="submit" class = "btn btn-secondary" value="글 작성">
 </form>
 
 {% endblock content %}
