@@ -26,6 +26,7 @@ def detail(request, pk):
 
     return render(request, 'reviews/detail.html', context)
 
+@login_required
 def create(request):
     if request.method == "POST":
         form = ReviewForm(request.POST)
@@ -45,12 +46,14 @@ def create(request):
     return render(request,'reviews/create.html', context)
 
 
+@login_required
 def delete(request, review_pk):
     review = Review.objects.get(pk=review_pk)
     if request.user == review.user:
         review.delete()
     return redirect('reviews:index')
 
+@login_required
 def update(request, review_pk):
     review = Review.objects.get(pk=review_pk)
     if request.user == review.user:
@@ -70,6 +73,7 @@ def update(request, review_pk):
     }
     return render(request, 'reviews/update.html', context)
 
+@login_required
 def comment_create(request, review_pk):
     # 몇 번 게시글인지 조회
     review = Review.objects.get(pk=review_pk)
