@@ -70,7 +70,7 @@ def update(request):
     return render(request, 'accounts/update.html', context)
 
 def profile(request, pk):
-    sub = Review.objects.filter(pk=pk)
+    sub = Review.objects.filter(user_id=pk)
     profile = User.objects.get(pk=pk)
     context = {
         'profile':profile,
