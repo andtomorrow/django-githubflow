@@ -6,6 +6,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from . models import User
+from reviews.models import Review
 
 # Create your views here.
 def login(request):
@@ -69,9 +70,11 @@ def update(request):
     return render(request, 'accounts/update.html', context)
 
 def profile(request, pk):
+    sub = Review.objects.filter(pk=pk)
     profile = User.objects.get(pk=pk)
     context = {
-        'profile':profile
+        'profile':profile,
+        'sub':sub
     }
     return render(request, 'accounts/profile.html', context)
 

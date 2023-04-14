@@ -1,11 +1,37 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h3>회원 정보</h3>
-<br>
-{{ profile.id}}
-{{ profile.email }}
 
+<div class="row justify-content-md-center">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-header">
+        <ul class="nav nav-pills card-header-pills">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">회원정보</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:update' %}">회원정보변경</a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <p>아이디 : {{ profile.username}}</p>
+        <p>이메일 : {{ profile.email }}</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        {% for profiles in  sub%}
+        <li class="list-group-item">
+          <p>제목:<a href="{%url 'reviews:detail' profiles.pk%}">{{ profiles.title}}</a></p>
+          <p>작성자:{{ profiles.user }}</p>
+          <p>영화:{{ profiles.movie }}</p>
+          <br>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
 {% endblock content %}
 
 
