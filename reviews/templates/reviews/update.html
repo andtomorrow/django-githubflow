@@ -4,7 +4,8 @@
 <form action="{% url 'reviews:update' review.pk %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit">
+    <input type="submit" class="btn btn-outline-success">
+    <a href="{% url 'reviews:detail' review.pk %}" class = "text-decoration-none m-3 btn btn-outline-warning">뒤로 가기</a>
 </form>
 
 {% endblock content %}
